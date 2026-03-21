@@ -1,0 +1,5 @@
+<p>client-list works!</p>
+
+@for (client of clients$ | async; track client.id) {
+  <p (click)="onClientClick(client)">{{client.firstName}} {{client.lastName}}</p>
+}
