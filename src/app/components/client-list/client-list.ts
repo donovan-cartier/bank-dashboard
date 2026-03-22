@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, output, Output } from '@angular/core';
 import { BankService } from '../../services/bank.service';
 import { Client } from '../../models/client.model';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,7 @@ import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 
 })
 export class ClientList{
-  @Output() clientSelected = new EventEmitter<Client>();
+  clientSelected = output<Client>();
   
   clients$: Observable<Client[]>;
   

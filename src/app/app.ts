@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { ClientList } from './components/client-list/client-list';
 import { Client } from './models/client.model';
 import { Header } from './components/header/header';

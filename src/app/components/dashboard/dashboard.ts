@@ -1,4 +1,4 @@
-import { Component, input, Input, signal } from '@angular/core';
+import { Component, effect, input, Input, signal } from '@angular/core';
 import { Client } from '../../models/client.model';
 import { HlmMuted, HlmH2, HlmP } from '@spartan-ng/helm/typography';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
@@ -14,8 +14,14 @@ import { Account } from '../../models/account.model';
 })
 export class Dashboard {
   client = input<Client | null>(null);
-  
   selectedAccount = signal<Account | null>(null);
+
+  constructor() {
+    effect(() => {
+      this.client();
+      this.selectedAccount.set(null);
+    });
+  }
 
   onAccountSelected(account: Account) {
     this.selectedAccount.set(account);
