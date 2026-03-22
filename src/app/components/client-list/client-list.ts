@@ -3,16 +3,21 @@ import { BankService } from '../../services/bank.service';
 import { Client } from '../../models/client.model';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-import { HlmH2 } from '@spartan-ng/helm/typography';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideSearch, lucideUser } from '@ng-icons/lucide';
 
+import { HlmH2 } from '@spartan-ng/helm/typography';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 
 
 @Component({
   selector: 'app-client-list',
-  imports: [CommonModule, HlmH2, HlmButtonImports],
+  imports: [CommonModule, HlmH2, HlmButtonImports, HlmInputGroupImports, NgIcon],
   templateUrl: './client-list.html',
   styleUrl: './client-list.css',
+  providers: [provideIcons({ lucideSearch, lucideUser })],
+
 })
 export class ClientList{
   @Output() clientSelected = new EventEmitter<Client>();

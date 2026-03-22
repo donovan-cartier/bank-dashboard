@@ -1,10 +1,19 @@
-<div class="text-secondary-foreground bg-secondary p-8 h-full">
-  <h2 hlmH2 class="mb-4">Mes clients</h2>
+<div class="text-primary p-8 h-full flex flex-col gap-4">
+  <h2 hlmH2>Mes clients</h2>
 
-  <div class="flex flex-col gap-2">
-    @for (client of clients$ | async; track client.id) {
-      <button hlmBtn size="lg" variant="outline" (click)="onClientClick(client)">{{client.firstName}} {{client.lastName}}</button>
-    }
+  <div hlmInputGroup>
+    <input hlmInputGroupInput placeholder="Rechercher un client..." />
+    <div hlmInputGroupAddon>
+      <ng-icon name="lucideSearch" />
+    </div>
   </div>
 
+  <div class="flex flex-col">
+    @for (client of clients$ | async; track client.id) {
+      <button hlmBtn variant="ghost" class="w-full justify-start" (click)="onClientClick(client)">
+      <ng-icon name="lucideUser" />
+        {{ client.lastName }} {{ client.firstName }}
+      </button>
+    }
+  </div>
 </div>
