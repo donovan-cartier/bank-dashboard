@@ -3,8 +3,8 @@
         <hlm-card
             size="sm"
             class="w-full max-w-md cursor-pointer"
-            [class.border-primary]="selectedAccount?.id === account.id"
-            [class.opacity-50]="selectedAccount && selectedAccount.id !== account.id"
+            [class.border-primary]="selectedAccount()?.id === account.id"
+            [class.opacity-50]="selectedAccount()?.id !== account.id"
             (click)="onAccountClick(account)">
 			<hlm-card-header>
                 @if (account.type === 'CHECKING') {

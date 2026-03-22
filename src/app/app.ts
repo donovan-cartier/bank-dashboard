@@ -15,7 +15,6 @@ export class App {
   selectedClient = signal<Client | null>(null);
 
   onClientSelected(client: Client) {
-    console.log('Selected client:', client);
     this.selectedClient.set(client);
   }
 }

@@ -18,10 +18,8 @@ export class TransactionList {
 
   constructor(private bankService: BankService) {
     effect(() => {
-      console.log('Account changed:', this.account());
       const a = this.account();
       if (a) {
-        console.log('Fetching transactions for account ID:', a.id);
         this.bankService.getAccountTransactions(a.id).subscribe(transactions => {
           this.transactions.set(transactions);
         });

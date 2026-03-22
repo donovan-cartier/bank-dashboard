@@ -10,37 +10,29 @@ import { HlmH2 } from '@spartan-ng/helm/typography';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 
-
 @Component({
   selector: 'app-client-list',
   imports: [CommonModule, HlmH2, HlmButtonImports, HlmInputGroupImports, NgIcon],
   templateUrl: './client-list.html',
   styleUrl: './client-list.css',
   providers: [provideIcons({ lucideSearch, lucideUser })],
-
 })
-export class ClientList{
+export class ClientList {
   clientSelected = output<Client>();
   selectedClient: Client | null = null;
-  
-  // clients$: Observable<Client[]>;
+
   filteredClients$: Observable<Client[]>;
-  
+
   private searchTerm = new BehaviorSubject<string>('');
 
   constructor(private bankService: BankService) {
-  this.filteredClients$ = combineLatest([
-    this.bankService.getClients(),
-    this.searchTerm
-  ]).pipe(
-    map(([clients, term]) => 
-      clients.filter(c => 
-        `${c.firstName} ${c.lastName}`
-          .toLowerCase()
-          .includes(term.toLowerCase())
-      )
-    )
-  );
+    this.filteredClients$ = combineLatest([this.bankService.getClients(), this.searchTerm]).pipe(
+      map(([clients, term]) =>
+        clients.filter((c) =>
+          `${c.firstName} ${c.lastName}`.toLowerCase().includes(term.toLowerCase()),
+        ),
+      ),
+    );
   }
 
   onClientClick(client: Client) {

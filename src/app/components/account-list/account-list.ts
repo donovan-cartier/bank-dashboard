@@ -16,15 +16,14 @@ export class AccountList{
   accounts = signal<Account[]>([]);
 
   accountSelected = output<Account>();
-  selectedAccount: Account | null = null;
+  selectedAccount = signal<Account | null>(null);
 
   constructor(private bankService: BankService) {
     effect(() => {
       const c = this.client();
       if (c) {
-        this.selectedAccount = null;
-        console.log('Fetching accounts for client ID:', c.id);
         this.bankService.getClientAccounts(c.id).subscribe(accounts => {
+          this.setAccount(accounts[0]);
           this.accounts.set(accounts);
         });
       }
@@ -32,7 +31,11 @@ export class AccountList{
   }
 
   onAccountClick(account: Account) {
-    this.selectedAccount = account;
+    this.setAccount(account);
+  }
+
+  setAccount(account: Account) {
+    this.selectedAccount.set(account);
     this.accountSelected.emit(account);
   }
 }
