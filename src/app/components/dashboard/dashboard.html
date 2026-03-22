@@ -1,0 +1,16 @@
+<div class="flex-1 h-full p-8">
+  @if (client()) {
+    <p class="text-4xl font-bold">{{ client()?.lastName }} {{ client()?.firstName }}</p>
+    <p hlmMuted>({{ client()?.email }})</p>
+
+    <hlm-separator />
+
+    <app-account-list [client]="client()" (accountSelected)="onAccountSelected($event)"></app-account-list>
+    <app-transaction-list [account]="selectedAccount()"></app-transaction-list>
+
+  } @else {
+    <div class="flex items-center justify-center h-full">
+      <p hlmMuted>Veuillez sélectionner un client.</p>
+    </div>
+  }
+</div>

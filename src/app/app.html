@@ -2,5 +2,9 @@
         <app-header></app-header>
         <div class="flex flex-1">
                 <app-client-list (clientSelected)="onClientSelected($event)"></app-client-list>
+
+                <div class="flex-1 flex-col">
+                        <app-dashboard [client]="selectedClient()"></app-dashboard>
+                </div>
         </div>
 </div>        
