@@ -1,5 +1,10 @@
-<p>client-list works!</p>
+<div class="text-secondary-foreground bg-secondary p-8 h-full">
+  <h2 hlmH2 class="mb-4">Mes clients</h2>
 
-@for (client of clients$ | async; track client.id) {
-  <p (click)="onClientClick(client)">{{client.firstName}} {{client.lastName}}</p>
-}
+  <div class="flex flex-col gap-2">
+    @for (client of clients$ | async; track client.id) {
+      <button hlmBtn size="lg" variant="outline" (click)="onClientClick(client)">{{client.firstName}} {{client.lastName}}</button>
+    }
+  </div>
+
+</div>

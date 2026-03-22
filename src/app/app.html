@@ -1,1 +1,9 @@
-<app-client-list (clientSelected)="onClientSelected($event)"></app-client-list>
+<div class="min-h-screen bg-background text-foreground flex flex-col">
+        
+        <app-header></app-header>
+        <div class="flex flex-1">
+                <app-client-list (clientSelected)="onClientSelected($event)"></app-client-list>
+        </div>
+
+
+</div>        
