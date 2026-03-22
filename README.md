@@ -1,59 +1,82 @@
-# BankDashboard
+# bank-dashboard
+Tableau de bord bancaire fictif permettant à un conseiller de consulter les comptes et l'historique de transactions de ses clients.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
+Front-end Angular fonctionnant avec [bank-api](https://github.com/donovan-cartier/bank-api), back-end Spring Boot qui expose les données via une API REST. En production, les deux projets ont pour objectif de fonctionner ensemble. La démo utilise des données mockées pour fonctionner sans serveur.
 
-## Development server
+**Démo** : [donovan-cartier.github.io/bank-dashboard](https://donovan-cartier.github.io/bank-dashboard/)
 
-To start a local development server, run:
+---
+
+## Fonctionnalités
+
+- Liste des clients avec recherche
+- Consultation des comptes (courant / épargne) par client
+- Historique des transactions avec montants (crédit / débit)
+- Données fictives mockées
+
+---
+
+## Stack
+
+- **Angular 21** — standalone components, signals, effects
+- **TypeScript**
+- **Spartan UI / shadcn** — composants UI
+- **Tailwind CSS**
+- **RxJS** — gestion des Observables et recherche avec `BehaviorSubject`
+
+---
+
+## Architecture
+
+```
+src/app/
+├── components/
+│   ├── client-list/       # Sidebar — liste et recherche des clients
+│   ├── account-list/      # Cards des comptes d'un client
+│   ├── transaction-list/  # Tableau des transactions d'un compte
+│   ├── dashboard/         # Zone principale
+│   └── header/
+├── services/
+│   └── bank.service.ts    # Appels HTTP (ou mock selon l'environnement)
+├── models/
+│   ├── client.model.ts
+│   ├── account.model.ts
+│   └── transaction.model.ts
+└── mocks/
+    └── bank.mock.ts       # Données fictives pour la démo
+```
+
+---
+
+## Lancer en local
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'application tourne sur `http://localhost:4200`.
 
-## Code scaffolding
+Par défaut en développement, l'application appelle l'API Spring Boot sur `http://localhost:8080`. Pour utiliser les données mockées, modifier `src/environments/environment.development.ts` :
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080',
+  useMock: true
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+## Projet associé — bank-api
+
+Ce front-end fait partie d'un projet full-stack avec [bank-api](https://github.com/donovan-cartier/bank-api), le back-end Spring Boot qui expose les données via une API REST.
+
+En production, les deux projets fonctionnent ensemble :
+
+```
+bank-dashboard (Angular)  ──►  bank-api (Spring Boot)  ──►  PostgreSQL
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+La démo live utilise des données mockées pour ne pas nécessiter de serveur actif. Pour faire tourner le projet en conditions réelles, lancer `bank-api` en local et configurer `useMock: false` dans l'environnement de développement.
