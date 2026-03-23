@@ -1,10 +1,14 @@
-<div class="min-h-screen bg-background text-foreground flex flex-col">
-        <app-header></app-header>
-        <div class="flex flex-1">
-                <app-client-list (clientSelected)="onClientSelected($event)"></app-client-list>
-
-                <div class="flex-1 flex-col">
-                        <app-dashboard [client]="selectedClient()"></app-dashboard>
-                </div>
-        </div>
-</div>        
+<app-client-list (clientSelected)="onClientSelected($event)">
+  <main class="bg-background text-foreground flex flex-1" hlmSideBarInset>
+    <header class="flex h-12 items-center justify-between px-4">
+      <button hlmSidebarTrigger><span class="sr-only"></span></button>
+      <router-outlet />
+    </header>
+    <div class="flex flex-1">
+      <div class="flex-1 flex-col">
+      
+        <app-dashboard [client]="selectedClient()"></app-dashboard>
+      </div>
+    </div>
+  </main>
+</app-client-list>

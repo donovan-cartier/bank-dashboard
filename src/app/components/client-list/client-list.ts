@@ -4,18 +4,22 @@ import { Client } from '../../models/client.model';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideUser } from '@ng-icons/lucide';
+import { lucideLayoutDashboard, lucideSearch, lucideUser } from '@ng-icons/lucide';
 
 import { HlmH2 } from '@spartan-ng/helm/typography';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
+import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
+
+import { HlmIcon } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'app-client-list',
-  imports: [CommonModule, HlmH2, HlmButtonImports, HlmInputGroupImports, NgIcon],
+  imports: [CommonModule, HlmButtonImports, HlmInputGroupImports, NgIcon, HlmSidebarImports, HlmIcon, HlmDropdownMenuImports],
   templateUrl: './client-list.html',
   styleUrl: './client-list.css',
-  providers: [provideIcons({ lucideSearch, lucideUser })],
+  providers: [provideIcons({ lucideSearch, lucideUser, lucideLayoutDashboard })],
 })
 export class ClientList {
   clientSelected = output<Client>();

@@ -1,23 +1,59 @@
-<div class="text-primary p-8 h-full flex flex-col gap-4 shadow-sm">
-  <h2 hlmH2>Mes clients</h2>
+<div hlmSidebarWrapper>
+  <hlm-sidebar>
 
-  <div hlmInputGroup>
-    <input hlmInputGroupInput placeholder="Rechercher un client..." (input)="search($event)"/>
-    <div hlmInputGroupAddon>
-      <ng-icon name="lucideSearch" />
+    <div hlmSidebarHeader class="mt-2">
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          <button hlmSidebarMenuButton align="start">
+            <div
+              class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
+            >
+              <ng-icon role="img" hlm size="sm" name="lucideLayoutDashboard"></ng-icon>
+            </div>
+            <div class="grid flex-1 text-left text-sm leading-tight">
+              <span class="font-medium">Mon dashboard</span>
+              <span class="text-xs">Conseiller</span>
+            </div>
+          </button>
+        </li>
+      </ul>
     </div>
-  </div>
 
-  <div class="flex flex-col">
-    @for (client of filteredClients$ | async; track client.id) {
-      <button
-        hlmBtn
-        [variant]="selectedClient === client ? 'default' : 'ghost'"
-        class="w-full justify-start"
-        (click)="onClientClick(client)">
-        <ng-icon name="lucideUser" />
-        {{ client.lastName }} {{ client.firstName }}
-      </button>
-    }
-  </div>
+    <div hlmSidebarContent>
+      <div hlmSidebarGroup>
+        <div hlmSidebarGroupLabel>Mes clients</div>
+        <div hlmSidebarGroupContent>
+          <div hlmInputGroup class="mb-4">
+            <input
+              hlmInputGroupInput
+              placeholder="Rechercher un client..."
+              (input)="search($event)"
+            />
+            <div hlmInputGroupAddon>
+              <ng-icon name="lucideSearch" />
+            </div>
+          </div>
+          <ul hlmSidebarMenu>
+            @for (client of filteredClients$ | async; track client.id) {
+              <li hlmSidebarMenuItem>
+                <a
+                  hlmSidebarMenuButton
+                  (click)="onClientClick(client)"
+                  [class.bg-primary]="selectedClient === client"
+                  [class.text-primary-foreground]="selectedClient === client"
+                  class="hover:bg-primary! hover:text-primary-foreground!"
+                >
+                  <ng-icon hlm name="lucideUser" />
+                  <span>{{ client.lastName }} {{ client.firstName }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </hlm-sidebar>
+
+  <ng-content />
 </div>

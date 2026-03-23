@@ -1,6 +1,6 @@
 import { Component, effect, input, Input, signal } from '@angular/core';
 import { Client } from '../../models/client.model';
-import { HlmMuted, HlmH2, HlmP } from '@spartan-ng/helm/typography';
+import { HlmMuted } from '@spartan-ng/helm/typography';
 import { HlmSeparatorImports } from '@spartan-ng/helm/separator';
 import { AccountList } from '../account-list/account-list';
 import { TransactionList } from "../transaction-list/transaction-list";
