@@ -31,11 +31,11 @@ Front-end Angular fonctionnant avec [bank-api](https://github.com/donovan-cartie
 ```
 src/app/
 ├── components/
-│   ├── client-list/       # Sidebar — liste et recherche des clients
+│   ├── client-list/       # Sidebar/Drawer — liste et recherche des clients
 │   ├── account-list/      # Cards des comptes d'un client
 │   ├── transaction-list/  # Tableau des transactions d'un compte
 │   ├── dashboard/         # Zone principale
-│   └── header/
+│   └── header/            # Header non utilisé
 ├── services/
 │   └── bank.service.ts    # Appels HTTP (ou mock selon l'environnement)
 ├── models/
